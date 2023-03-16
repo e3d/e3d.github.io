@@ -5,11 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Demo of Embedded AutoCalcs Calculation </title>
-    <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <iframe src="https://v2.donwen.com/embed/c-20220311.035340069-e3d-00f43d-590820"
-            width="100%" height="300" style="border:1px solid black;">
-    </iframe>
+    <h2>Summary</h2>
+    <p>This article introduces an approach and a tool for users to perform Torque to Power calculation in a Unit Conversion Unified (Transparent) way.</p>
+    <h2>Common Practices</h2>    
+    <p>
+      As most of us know,
+P = T·ω ·········································· (1)
+is the equation for Power (P) calculation using Torque (T) and Angular Velocity (ω), which is one of the most common performed physics / engineering calculations.
+Most common used?!
+In physics, YES, considering rotational motion related equipment like motors being used everywhere in our daily life.
+In practice, NO!!!, as angular velocity is not normally measured or used directly. In other words, angular velocity does not make intuitive sense and not very user friendly, especially when using imperial unit system. Eg: given angular velocity
+ω = 157 rad/s
+most of us can't tell how fast that is, even for those who know it is a measurement of angular velocity, though it can be converted to n = 1500 rpm.
+However, if we are given a motor speed of
+n = 1500 rpm
+a lot of people would know it is a common motor speed and can easily relate that to our real life experience and have a feeling how fast the motor turns.
+So for practical use, we need a way to calculate Power (P) using Torque (T) and rotational speed (n). Fortunately, this was addressed a long time ago and equations were developed that can be taken for granted nowadays.
+P [W] = T [N·m] x n [rpm] / 9.550 ···························· (2a)
+P [kW] = T [N·m] x n [rpm] / 9550 ···························· (2b)
+P [HP] = T [lb·in] x n [rpm] / 63025 ························· (2c)
+P [HP] = T [lb·ft] x n [rpm] / 5252 ···························· (2d)
+Wouldn't it be nice if we could use a common equation without memorizing the equations and those weird factors (9.55, 9550, 63025, 5252) since we are going to use a calculator most likely? Let's give it a try. From base physics, we have
+ω = 2πf
+f = n / 60
+Thus Eq.(1) becomes
+P = T·2π f ······································· (3)
+P = T·2π n / 60 ································· (3a)
+or
+P = T·π n / 30 ································· (3b)
+Of course, with this last equation, you can perform the calculation in metric / SI units reliably, but what about imperial units? We know imperial unit for P is [HP], which is defined as [550 ft·lb∕s]. Should we use [lb·in] or [lb·ft] as unit for T to calculate P in [HP] correctly using the above equation? Unfortunately, Neither One!!! Because there is the multiplier 550!
+In order to use Eq.(3b), dimensions of both sides of the equation should be consistent. Considering that [HP] is defined as [550 ft·lb∕s], if we use [ft·lb∕s] as unit of P, we can use Eq.(3b) in the following format:
+P [ft·lb∕s] = T [ft·lb]·π n[rpm] / 30 ···············(4a)
+to convert to [HP], we have:
+P [HP] = T [ft·lb]·π n[rpm] / 30 / 550 ············(4b)
+or:
+P [HP] = T [ft·lb]·n[rpm] / 5252 ············(4c)
+accordingly, for T in [ft·in], it becomes
+P [HP] = T [ft·in]·n[rpm] / 5252 / 12 ·······(4d)
+or:
+P [HP] = T [ft·in]·n[rpm] / 63025 ···········(4e)
+    </p>
+    
+    <h2>Unit Conversion Unified Approach with Tool</h2>
+    <p>At v2.donwen.com, you can find a calculator (Torque to Power Calculation) that allows performing 
+      the Torque to Power calculation in a unified way, ie: you can use Eq.(1) no matter what unit 
+      system is used. Please note that all unit input boxes are dropdown lists for user to pick unit 
+      in the same category. The following two images show the same calculation using different unit sets.
+    </p>
+    <p>Users can create their own calculations and store in the cloud. Give it a try. Let us know if you 
+      have any questions or comments, or suggestions.
+    </p>
+    
+    <h2>References</h2>
+    <ol>
+      <li>https://mriquestions.com/angular-frequency-omega.html</li>
+      <li>http://wentec.com/unipower/calculators/power_torque.asp (Notice the errors in their metric equations!)</li>
+    </ol>
+    <p></p>
+    
+    <h2>Embedded AutoCalcs Example (Headless)</h2>
+    <div>
+      <iframe src="https://v2.donwen.com/embed/c-20220311.035340069-e3d-00f43d-590820"
+              width="80%" height="300" style="border:1px solid black;">
+      </iframe>
+      <iframe src="https://v2.donwen.com/embed/c-20220716.172000808-e3d-05f451-553bb2"
+              width="80%" height="450" style="border:1px solid black;">
+      </iframe>   
+    </div>
   </body>
 </html>
