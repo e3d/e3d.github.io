@@ -2,4 +2,4 @@
 demo of embedded AutoCalcs calculation, also shows benefits of being Beyond Unit Conversion.
 
 To see the demo page, go to:
-[AutoCalcs Demo Embedded Page](https://e3d.github.io)
+[AutoCalcs Demo Embedded Page](https://e3d.github.io) @ https://e3d.github.io
